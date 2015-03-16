@@ -1,0 +1,70 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="libro.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:libro.Models" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot es la cuadrícula raíz donde se coloca todo el contenido de la página-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <models:Libro x:Key="ElPrincipito" Autor="Anónimo" Codigo="L12" Genero="Fantasia" Paginas="20" Nombre="El Principito"/>
+            <models:libros x:Key="LosLibros"/>
+        </Grid.Resources>
+       
+
+        <!--TitlePanel contiene el nombre de la aplicación y el título de la página-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="MI APLICACIÓN" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <TextBlock Text="nombre de la página" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel. Colocar aquí el contenido adicional-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" DataContext="{StaticResource LosLibros}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Margin="60 20 0 10">Nombre:</TextBlock>
+                <TextBlock Margin="60 40 0 10">Autor:</TextBlock>
+                <TextBlock Margin="60 30 0 10">Código:</TextBlock>
+                <TextBlock Margin="60 40 0 10">Género:</TextBlock>
+                <TextBlock Margin="60 30 0 10">Páginas:</TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding Path=Data[1]}">
+                <TextBox x:Name="nombre" Text="{Binding Nombre, Mode=TwoWay}"/>
+                <TextBox x:Name="autor" Text="{Binding Autor, Mode=TwoWay}"/>
+                <TextBox x:Name="cod" Text="{Binding Codigo, Mode=TwoWay}" />
+                <TextBox x:Name="gen" Text="{Binding Genero, Mode=TwoWay}"/>
+                <TextBox x:Name="pag" Text="{Binding Paginas, Mode=TwoWay}"/>
+                
+            </StackPanel>
+            
+            <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Aceptar" Click="Button_Click"/>
+
+        </Grid>
+
+        
+    </Grid>
+
+</phone:PhoneApplicationPage>
